@@ -14,9 +14,11 @@ class I2C
 {
   public:
     I2C();
+    void init();
     bool ready();
-    char* get();
+    byte* get();
     void send(int i);
+    
   private:
   
 };

@@ -13,13 +13,8 @@
 class SensorHandler
 {
   public:
-    SensorHandler();
-    byte endStop(byte pin);
-    enum Constants {
-        IN = 1,
-        OUT = 0
-    };  
-        
+    byte distance();
+    byte soilHumidity();        
   private:
   
 };

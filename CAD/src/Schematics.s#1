@@ -954,6 +954,11 @@
 <junction x="7.62" y="139.7"/>
 </segment>
 </net>
+<net name="N$46" class="0">
+<segment>
+<wire x1="78.74" y1="142.24" x2="78.74" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+</net>
 <net name="N$47" class="0">
 <segment>
 <wire x1="114.3" y1="137.16" x2="114.3" y2="142.24" width="0.1524" layer="91"/>

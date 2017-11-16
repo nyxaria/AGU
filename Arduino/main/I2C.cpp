@@ -1,23 +1,21 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "I2C.h"
-#include "RpiAP.h"
+#include "RAP.h"
 
 #define I2C_ADDRESS 0x01
 #define PACKET_BEGIN 0xff
 #define PACKET_END 0xfe
 #define PACKET_SIZE 32
 
-int data = 254;
+byte data = 254;
 int out = 0;
 int toRead = 0;
 bool done = false;
-char dataBuffer[PACKET_SIZE + 1];
+byte dataBuffer[PACKET_SIZE + 1];
 
 
 void sendData() {
-    Serial.print("SENDING DATA: ");
-    Serial.println(out);
     Wire.write(out);
 }
 
@@ -26,32 +24,33 @@ void receiveData(int byteCount){
     data = Wire.read();
     if(data == PACKET_BEGIN) {
       toRead = PACKET_SIZE - 1;
-      for(int i = 0; i < PACKET_SIZE; i++) {
-        dataBuffer[i] = '\0';
+      for(byte i = 0; i < PACKET_SIZE; i++) {
+        dataBuffer[i] = 0;
       }
-      out = 0;
+      //out = 0;
     } else if(data == PACKET_END) {
-      out = RpiAP::DATA_RECEIVED; //notify pi we got the data
+      out = RAP::DATA_RECEIVED; //notify pi we got the data
       sendData();                 //
-      Serial.print("RECIEVED DATA: ");
-      Serial.println(dataBuffer);
       done = true;
       toRead = -1;
     } else if(toRead != -1) {
-      dataBuffer[(PACKET_SIZE - 1) - toRead--] = (char) data;
+      out = data;
+      dataBuffer[(PACKET_SIZE - 1) - toRead--] = data;
     }
   }
 }
 
-
-I2C::I2C() {
+void I2C::init() {
   Wire.begin(I2C_ADDRESS);
   Wire.onReceive(receiveData);
   Wire.onRequest(sendData);
 }
 
+I2C::I2C() {
+}
 
-char* I2C::get() {
+
+byte* I2C::get() {
   if(ready()) {
     done = false;
     return dataBuffer;
@@ -61,8 +60,8 @@ char* I2C::get() {
 }
 
 void I2C::send(int i) {
-  out = i;
-  sendData();
+    out = i;
+    sendData();
 }
 
 bool I2C::ready() {

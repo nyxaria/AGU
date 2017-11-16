@@ -1,37 +1,37 @@
- #include "I2C.h"
-#include "RpiAP.h"
+#include "I2C.h"
+#include "RAP.h"
 #include "MotorHandler.h"
+#include "SensorHandler.h"
 
+SensorHandler sensorHandler;
 MotorHandler motorHandler;
 I2C i2c;
-RpiAP rap; //raspberry pi - arduino - protocol (names are not my strong point)
+RAP rap; //raspberry pi - arduino - protocol (names are not my strong point)
 
 void setup() {
-    Serial.begin(9600);
-    pinMode(13, OUTPUT);
+    pinMode(38, OUTPUT); //water
+    pinMode(32, OUTPUT); //vacuum
+    digitalWrite(32, LOW);
+    digitalWrite(38, LOW);
+
+    //Serial.begin(9600); //for debugging
+    i2c.init();
     motorHandler.init();
     rap.motors = &motorHandler;
-    motorHandler.get(MotorHandler::m_x1)->s._targetPos = 500*16;
-    motorHandler.get(MotorHandler::m_x2)->s._targetPos = 500*16;
-
-    //rap.handleRequest("Mxrff");
-    //rap.handleRequest("MXrff");
+    rap.sensors = &sensorHandler;
+   
 }
-
+long delayMs = millis();
+int toSend = 0;
 void loop() {
     if (i2c.ready()) { //check for data from rpi
-        char* data = i2c.get();
-        int result = rap.handleRequest(data);
-        
-        i2c.send(result); //respond to rpi
+        i2c.send(rap.handleRequest(i2c.get())); //run process and respond to rpi
+        delayMs = millis();
     }
-//
-//      motorHandler.get(MotorHandler::m_x1)->s.run();
-//      motorHandler.get(MotorHandler::m_x2)->s.run();
-//      motorHandler.get(MotorHandler::m_y)->s.run();
-//      motorHandler.get(MotorHandler::m_e)->s.run();
-//     motorHandler.get(MotorHandler::m_z)->s.run();
-      motorHandler.tick();
-    //delay(100);
+    if(millis() - delayMs > 100) { //send constant flag for RPI except when requesting information
+        
+        i2c.send(motorHandler.finished());
+    }
+    motorHandler.tick();
 }
 

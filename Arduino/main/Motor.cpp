@@ -1,111 +1,140 @@
 #include "Arduino.h"
 #include "Motor.h"
 #include "MotorHandler.h"
-#include "RpiAP.h"
+#include "RAP.h"
 #include "SensorHandler.h"
 #include <AccelStepper.h>
 #include <stdlib.h>     /* abs */
+#include <math.h>
 
-SensorHandler sensors;
-
-byte speed, acceleration;
-bool busy = false;
-bool homing = false;
-int stepsPerMM = 5;
-
-
-Motor::Motor() {
-    
-}
-
-AccelStepper s(1);
-void Motor::init(byte key, byte sPin, byte dPin, byte pES, int sPmm) {
+void Motor::init(byte sPin, byte dPin, byte pES, int sPmm) {
     stepsPerMM = sPmm;
     endStopPin = pES;
-    //init(stepper);
     s._interface = 1;
     s._pin[0] = sPin;
     s._pin[1] = dPin;
-   // s.enableOutputs();
+    stepPin = sPin;
+    dirPin = dPin;
+    s.enableOutputs();
+    s._targetPos = s._currentPos = 0;
+    pinMode(pES, INPUT);
 
-    s.setMaxSpeed(2000);
-    s.setSpeed(2000);
-    s.setAcceleration(1000);
+    if(sPin == 8) {
+        s.setPinsInverted(true);
+    }
+    
+    if(sPin == 10) { // y dir does not have 16 micro stepping enabled
+        s.setMaxSpeed(2000/4);
+        s.setSpeed(2000/4);
+        s.setAcceleration(1000/4);
+    } else {
+        s.setMaxSpeed(2000);
+        s.setSpeed(2000);
+        s.setAcceleration(1000);
+    }
+   
 }
 
 
-int Motor::enqueue(char* req) {
+int Motor::enqueue(byte* req) {
     switch(req[2]) {
-        case RpiAP::rotate:
+        case RAP::rotate:
             return rotate((byte)req[3], (byte)req[4]);
             break;
-        case RpiAP::speed:
+        case RAP::speed:
             return speed((byte)req[3]); // 0 - 100 % of pre-determined maxSpeed
             break;
-        case RpiAP::stop:
+        case RAP::stop:
             return stop();
             break;
-        case RpiAP::reset:
+        case RAP::reset:
             return reset();    
         default:
-            return RpiAP::FAILURE;
+            return RAP::FAILURE;
   }
 }
 
 void Motor::tick() {
-   s.run();
-   if (s.distanceToGo() == 0)
- s.moveTo(-s.currentPosition());
-    if(homing) {
-        if(sensors.endStop(endStopPin) == 1) {
-            stop();
-            s._currentPos = 0;
-            s._targetPos = 0;
-            homing = false;
-        } else {
-            s._targetPos = s._currentPos - 10;
-            delay(1);
-        }
-        return;
-    }
+   if(ready) {
+       if(homing) {
+            s.run();
+            if(digitalRead(endStopPin) == HIGH) {
+                if(timer == 0) 
+                    timer = millis();
+                
+                if(millis() - timer > 10) {
+                    s.stop();
+                    s.runToPosition();
+                    s._targetPos = s._currentPos = 0;
+                    //s.runToPosition();
+                    //s._targetPos = s._currentPos = 0;
 
-    if(s._targetPos == s._currentPos) {
-        busy = false;
-    }
+                    timer = 0;
+                    homing = false;
+                    busy = false;
+                    complete = true;
+    
+                    if(stepPin == 10) { // y dir does not have 16 micro stepping enabled
+                        s.setMaxSpeed(2000/2);
+                        s.setSpeed(2000/2);
+                        s.setAcceleration(1000/2);
+                    } else {
+                        s.setMaxSpeed(2000);
+                        s.setSpeed(2000);
+                        s.setAcceleration(1000);
+                    }
+                }
+            } else {
+                timer = millis();
+            }
+       } else {
+            if(s._targetPos != s._currentPos) {       
+                s.run();
+            }
+            busy = !(s._targetPos == s._currentPos);
+       }
+   }
 }
 
+
 int Motor::rotate(byte high, byte low) {
-    int mm = high + low;
-    s._targetPos = abs(mm*stepsPerMM*100);
+    complete = false;
     busy = true;
-    return 1;
+    int mm = high*255 + low;
+    double toDo = 0.0;
+    leftOverSteps += modf(leftOverSteps, &toDo);
+
+    s.moveTo(-(int)((mm + toDo)*stepsPerMM));
+
+    return RAP::SUCCESS;
 
 }
 
 int Motor::speed(byte percentage) {
     s.setMaxSpeed((percentage * Motor::maxSpeed) / 100);
-    s.setSpeed((percentage%101 * Motor::maxSpeed) / 100);
-    return 1;
+    s.setSpeed((percentage * Motor::maxSpeed) / 100);
+    s.setAcceleration((percentage * Motor::maxSpeed) / 200);
+    return RAP::SUCCESS;
 }
 
 
 int Motor::stop() {
     s.stop();
-    s.runToPosition();
     s._targetPos = s._currentPos;
     busy = false;
+    return RAP::SUCCESS;
 }
 
 int Motor::reset() { // implement system to check when motors at origin
-    busy = false;
-    s.stop(); 
-    s.runToPosition();
+    complete = false;
+    busy = true;
     homing = true;
+    s.stop(); 
+    
+    s.setMaxSpeed(1000);
+    s.setSpeed(1000);
+    s.setAcceleration(500);
+    s.move(1000000);
+    return RAP::SUCCESS;
 }
-
-
-
-
-
-
 

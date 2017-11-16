@@ -1,6 +1,5 @@
 /*
- * Motor.h - class which represents a StepperMotor
- * address = 0x01
+ * Motor.h - class which abstracts away a Stepper Motor
  * 
  * Author: nyxaria, Created: 10/09/17
 */
@@ -14,25 +13,33 @@
 class Motor
 {
   public:
-    Motor();   
     int rotate(byte mm, byte dir);
     int stop();
     int speed(byte percentage);
     int reset();
 
-    int stepsPerMM;
-    int endStopPin; 
-    int enqueue(char* req);
-    void init(byte key, byte sPin, byte dPin, byte pES, int sPmm);
-    void tick();
 
+    boolean busy = false;
+    boolean homing = false;
+    boolean ready = false;
+    int stepPin;
+    int dirPin;
+    int endStopPin;
+    double leftOverSteps;
+    long timer;
+    int stepsPerMM;
+    int enqueue(byte* req);
+    void init(byte sPin, byte dPin, byte pES, int sPmm);
+    void tick();
+    
+    
+    bool complete;
     AccelStepper s;
     
     enum Constants {
         CLOCKWISE = 1,
         ANTICLOCKWISE = 0,
-        stepsPerMM_TIMING_BELT = 5,
-        stepsPerMM_LEADSCREW = 200,
+        stepsPerMM_TIMING_BELT = 80,
         stepsPerMM_GEAR = 200,
         maxSpeed = 2000
     };
