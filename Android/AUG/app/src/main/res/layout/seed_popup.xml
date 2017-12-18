@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pot_popup"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/border"
+    android:orientation="vertical"
+    android:padding="10sp" >
+
+    <Spinner
+        android:id="@+id/seed_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:spinnerMode="dialog"/>
+
+    <Button
+        android:id="@+id/seed_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/seed_spinner"
+        android:layout_marginTop="5dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="Change Color" />
+
+
+
+</RelativeLayout>

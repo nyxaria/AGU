@@ -17,7 +17,10 @@ void Motor::init(byte sPin, byte dPin, byte pES, int sPmm) {
     dirPin = dPin;
     s.enableOutputs();
     s._targetPos = s._currentPos = 0;
-    pinMode(pES, INPUT);
+    if(stepPin == 10)
+        pinMode(pES, INPUT_PULLUP);
+    else
+        pinMode(pES, INPUT);
 
     if(sPin == 8) {
         s.setPinsInverted(true);
@@ -58,11 +61,13 @@ void Motor::tick() {
    if(ready) {
        if(homing) {
             s.run();
-            if(digitalRead(endStopPin) == HIGH) {
+            if((stepPin == 10 && digitalRead(endStopPin) == LOW) || (stepPin != 10 && digitalRead(endStopPin) == HIGH)) {
                 if(timer == 0) 
                     timer = millis();
                 
-                if(millis() - timer > 10) {
+                if((millis() - timer > 10 && stepPin != 10) || (millis() - timer > 5 && stepPin == 10)) {
+                    if(stepPin == 10)
+                        digitalWrite(13, HIGH);
                     s.stop();
                     s.runToPosition();
                     s._targetPos = s._currentPos = 0;
@@ -75,9 +80,9 @@ void Motor::tick() {
                     complete = true;
     
                     if(stepPin == 10) { // y dir does not have 16 micro stepping enabled
-                        s.setMaxSpeed(2000/2);
-                        s.setSpeed(2000/2);
-                        s.setAcceleration(1000/2);
+                        s.setMaxSpeed(2000/4);
+                        s.setSpeed(2000/4);
+                        s.setAcceleration(1000/4);
                     } else {
                         s.setMaxSpeed(2000);
                         s.setSpeed(2000);
@@ -100,11 +105,12 @@ void Motor::tick() {
 int Motor::rotate(byte high, byte low) {
     complete = false;
     busy = true;
-    int mm = high*255 + low;
-    double toDo = 0.0;
-    leftOverSteps += modf(leftOverSteps, &toDo);
+    homing = false;
+    long mm = high*((long)255) + low;
+    //double toDo = 0.0;
+    //leftOverSteps += modf(leftOverSteps, &toDo);
 
-    s.moveTo(-(int)((mm + toDo)*stepsPerMM));
+    s.moveTo(-abs((long)((mm/* + toDo*/)*stepsPerMM)));
 
     return RAP::SUCCESS;
 
@@ -125,16 +131,23 @@ int Motor::stop() {
     return RAP::SUCCESS;
 }
 
-int Motor::reset() { // implement system to check when motors at origin
+int Motor::reset() {
     complete = false;
     busy = true;
     homing = true;
     s.stop(); 
-    
+
+    if(stepPin != 10) {
     s.setMaxSpeed(1000);
-    s.setSpeed(1000);
+    s.setSpeed(500);
     s.setAcceleration(500);
-    s.move(1000000);
+    } else {
+        s.setMaxSpeed(250);
+        s.setSpeed(250);
+        s.setAcceleration(500);
+    }
+        s.move(1000000);
+
     return RAP::SUCCESS;
 }
 

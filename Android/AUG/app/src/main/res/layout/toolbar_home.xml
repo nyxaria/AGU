@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setup"
+        android:textColor="@color/textPrimary"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:id="@+id/toolbar_title" />
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_marginRight="10dp"
+        app:materialIcon="plus"
+        app:materialIconColor="#fff"
+        app:materialIconSize="24dp"
+        android:layout_gravity="right"
+        android:id="@+id/toolbar_plus"
+        android:visibility="gone"/>
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_marginRight="10dp"
+        app:materialIcon="lock"
+        app:materialIconColor="#fff"
+        app:materialIconSize="24dp"
+        android:layout_gravity="right"
+        android:id="@+id/toolbar_tick"
+        android:visibility="gone"/>
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_marginRight="10dp"
+        app:materialIcon="cancel"
+        app:materialIconColor="#fff"
+        app:materialIconSize="24dp"
+        android:layout_gravity="right"
+        android:id="@+id/toolbar_x"
+        android:visibility="gone"/>
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_marginRight="10dp"
+        app:materialIcon="format_rotate_90"
+        app:materialIconColor="#fff"
+        app:materialIconSize="24dp"
+        android:layout_gravity="right"
+        android:id="@+id/toolbar_rotate"
+        android:visibility="gone"/>
+
+
+</android.support.v7.widget.Toolbar>

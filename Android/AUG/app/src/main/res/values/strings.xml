@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AGU</string>
+    <string-array name="drawer_list">
+        <item>Garden</item>
+        <item>Seed Bank</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toolbarTitle">AUG</string>
+
+    <string-array name="units_array">
+        <item>mm</item>
+        <item>inch</item>
+    </string-array>
+
+</resources>

@@ -14,6 +14,8 @@ void setup() {
     digitalWrite(32, LOW);
     digitalWrite(38, LOW);
 
+    //pinMode(13, OUTPUT);
+   // digitalWrite(13, LOW);
     //Serial.begin(9600); //for debugging
     i2c.init();
     motorHandler.init();

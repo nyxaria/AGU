@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pot_popup"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/border"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+    <TextView
+        android:id="@+id/popup_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="title" />
+
+    <TextView
+        android:id="@+id/popup_waterLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/popup_title"
+        android:gravity="center"
+        android:text="Soil humidity" />
+
+    <TextView
+        android:id="@+id/popup_waterField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/popup_title"
+        android:layout_alignParentRight="true"
+        android:text="XX%" />
+
+    <TextView
+        android:id="@+id/popup_frequencyUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="4dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/popup_waterLabel"
+        android:gravity="center"
+        android:text="Day" />
+
+    <TextView
+        android:id="@+id/popup_frequencyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/popup_waterLabel"
+        android:gravity="center"
+        android:text="Water every" />
+
+
+    <EditText
+        android:id="@+id/popup_frequencyField"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="2dp"
+        android:textSize="14sp"
+        android:gravity="end"
+        android:inputType="number"
+        android:textColor="@color/textSecondary"
+        android:layout_alignBottom="@+id/popup_frequencyUnit"
+        android:layout_alignTop="@id/popup_frequencyLabel"
+        android:layout_alignBaseline="@id/popup_frequencyLabel"
+        android:layout_toStartOf="@+id/popup_frequencyUnit"/>
+
+
+    <TextView
+        android:id="@+id/popup_dateField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/popup_frequencyLabel"
+        android:layout_alignParentRight="true"
+        android:text="X days" />
+
+
+    <TextView
+        android:id="@+id/popup_dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/popup_frequencyLabel"
+        android:gravity="center"
+        android:text="Active for" />
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        app:materialIcon="arrow_collapse_right"
+        app:materialIconColor="#000"
+        app:materialIconSize="18dp"
+        android:id="@+id/popup_collapse"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"/>
+
+    <org.eazegraph.lib.charts.ValueLineChart
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cubiclinechart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/popup_dateField"
+        android:layout_marginTop="14dp"
+        app:egUseCubic="true"
+        app:egUseOverlapFill="true"
+        app:egCurveSmoothness="0.4"
+        app:egIndicatorLineColor="#FE6DA8"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"
+        android:layout_above="@id/popup_collapse"
+        android:visibility="gone"/>
+</RelativeLayout>

@@ -13,7 +13,7 @@
 
 #define Y_STEP_PIN 10
 #define Y_DIR_PIN  11
-#define Y_ENDSTOP_PIN 41
+#define Y_ENDSTOP_PIN 52
 
 //#define E_STEP_PIN 6
 //#define E_DIR_PIN  7
@@ -22,7 +22,7 @@
 #define Z_DIR_PIN  7
 #define Z_ENDSTOP_PIN 40
 
-float stepsPerMM_LEADSCREW = 141.73;
+float stepsPerMM_LEADSCREW = 141.73*8.0/9.0;
 
 
 

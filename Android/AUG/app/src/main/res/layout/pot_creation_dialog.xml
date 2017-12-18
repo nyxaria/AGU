@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_dialog_layout_design_user_input"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+    android:id="@+id/dialogTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Add Pot"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textColor="@color/textSecondary" />
+
+    <TextView
+        android:id="@+id/pot_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seed Bank Empty!"
+        android:layout_below="@id/dialogTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:textColor="@color/textSecondary"
+        android:visibility="invisible"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Remember"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_above="@+id/pot_spinner_seed"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:id="@+id/pot_spinner_seed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:spinnerMode="dialog"
+        android:textColor="@color/textSecondary" />
+
+    <CheckBox
+        android:id="@+id/checkbox_seed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Plant Seed?"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_below="@+id/pot_spinner_seed"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:id="@+id/popup_labelGridText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/textSecondary"
+        android:text="grid"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBaseline="@+id/checkbox_seed"
+        android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:id="@+id/pot_gridy"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pot_spinner_seed"
+        android:hint="1"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/checkbox_seed"
+        android:textColor="@color/textSecondary"
+        android:layout_toLeftOf="@id/popup_labelGridText"/>
+
+    <TextView
+        android:id="@+id/popup_labelGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/textSecondary"
+        android:text="x"
+        android:layout_alignBaseline="@+id/pot_gridy"
+        android:layout_alignBottom="@+id/pot_gridy"
+        android:layout_toLeftOf="@+id/pot_gridy"/>
+
+    <EditText
+        android:id="@+id/pot_gridx"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:hint="1"
+        android:inputType="number"
+        android:textColor="@color/textSecondary"
+        android:layout_below="@+id/pot_spinner_seed"
+        android:layout_alignBaseline="@+id/checkbox_seed"
+
+        android:layout_toLeftOf="@+id/popup_labelGrid"/>
+
+
+
+
+    <TextView
+        android:id="@+id/popup_labelRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/textSecondary"
+        android:text="Rectangle"
+        android:layout_alignBaseline="@+id/pot_switch_type"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/popup_labelCirlce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circle"
+        android:textSize="15sp"
+        android:textColor="@color/textSecondary"
+        android:layout_alignBaseline="@+id/pot_switch_type"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/pot_switch_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_seed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:theme="@style/TypeSwitch"
+        android:checked="false" />
+
+
+    <EditText
+        android:id="@+id/pot_dim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pot_switch_type"
+        android:layout_marginTop="6dp"
+        android:hint="Radius (mm)"
+        android:inputType="number"
+        android:textColor="@color/textSecondary" />
+
+    <EditText
+        android:id="@+id/pot_dim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pot_switch_type"
+        android:layout_marginTop="6dp"
+        android:hint="Width (mm)"
+        android:inputType="number"
+        android:textColor="@color/textSecondary" />
+
+    <EditText
+        android:id="@+id/pot_dim2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/pot_switch_type"
+        android:layout_marginTop="6dp"
+        android:hint="Length (mm)"
+        android:inputType="number"
+        android:textColor="@color/textSecondary"
+        android:visibility="invisible" />
+
+
+
+</RelativeLayout>
