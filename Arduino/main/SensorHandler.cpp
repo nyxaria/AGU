@@ -11,7 +11,7 @@
 unsigned int tempVar;
 
 /*
- * returns avg. distance from probe to nearest obstacle.
+ * returns avg. distance from probe to nearest obstacle. (cm)
  */
 byte SensorHandler::distance() {
 
@@ -38,13 +38,13 @@ byte SensorHandler::distance() {
  * Returns percentage calculated from the analog output of the probe.
  */
 byte SensorHandler::soilHumidity() {
-  pinMode(SOIL_SENSOR_POWER, OUTPUT);//Set D7 as an OUTPUT
+  pinMode(SOIL_SENSOR_POWER, OUTPUT);
   pinMode(SOIL_SENSOR_PIN, INPUT);
   digitalWrite(SOIL_SENSOR_POWER, LOW);
-  digitalWrite(SOIL_SENSOR_POWER, HIGH);//turn D7 "On"
+  digitalWrite(SOIL_SENSOR_POWER, HIGH);
   delay(10);//wait 10 milliseconds 
-  tempVar = analogRead(SOIL_SENSOR_PIN);//Read the SIG value form sensor 
-  digitalWrite(SOIL_SENSOR_POWER, LOW);//turn D7 "Off"
+  tempVar = analogRead(SOIL_SENSOR_PIN);
+  digitalWrite(SOIL_SENSOR_POWER, LOW);
 
   return map(tempVar, 0, 1023, 0, 100);
 }

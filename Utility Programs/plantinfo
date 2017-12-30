@@ -1,0 +1,39 @@
+Crop,Planting Depth (mm),Plant Spacing (mm),Water (litre/day/plant)
+Beans (bush),38,76,1.08,10
+Beans (pole),38,177,1.08,10
+Beets,19,50,0.54,10
+Broccoli,0,431,0.67,10
+Cabbage,6,431,1.08,10
+Carrots,9,50,0.54,10
+Cauliflower,6,533,1.08,10
+Celery,4,190,1.08,10
+Cucumbers,12,228,0.54,10
+Eggplant,9,533,0.54,10
+Lettuce,9,381,1.08,10
+Melon,12,762,0.81,10
+Onion,9,139,0.40,10
+Peas,38,50,1.08,10
+Peppers,6,457,0.81,10
+Potatoes,88,279,1.08,10
+Pumpkin,25,761,0.81,10
+Radish,6,25,0.40,10
+Spinach,12,114,1.08,10
+Squash (winter),25,685,0.81,10
+Squash (summer),25,381,0.54,10
+Tomatoes,6,762,1.08,10
+Watermelon,12,266,0.54,10
+Anise,5,30,nd,17
+Basil,5,26,nd,17
+Borage,5,38,nd,17
+Catnip,5,41,nd,17
+Chamomile,5,15,nd,17
+Chervil,5,30,nd,17
+Chives,5,18,nd,17
+Cumin,5,25,nd,17
+Dill,5,34,nd,17
+Fennel,5,26,nd,17
+Gardencress,5,5,nd,17
+Hyssop,5,22,nd,17
+Lavender,5,52,nd,17
+Marjoram,5,41,nd,17
+Mint,5,78,nd,17

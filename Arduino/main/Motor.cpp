@@ -66,13 +66,9 @@ void Motor::tick() {
                     timer = millis();
                 
                 if((millis() - timer > 10 && stepPin != 10) || (millis() - timer > 5 && stepPin == 10)) {
-                    if(stepPin == 10)
-                        digitalWrite(13, HIGH);
                     s.stop();
                     s.runToPosition();
                     s._targetPos = s._currentPos = 0;
-                    //s.runToPosition();
-                    //s._targetPos = s._currentPos = 0;
 
                     timer = 0;
                     homing = false;
@@ -138,15 +134,15 @@ int Motor::reset() {
     s.stop(); 
 
     if(stepPin != 10) {
-    s.setMaxSpeed(1000);
-    s.setSpeed(500);
-    s.setAcceleration(500);
+        s.setMaxSpeed(1000);
+        s.setSpeed(500);
+        s.setAcceleration(500);
     } else {
         s.setMaxSpeed(250);
         s.setSpeed(250);
         s.setAcceleration(500);
     }
-        s.move(1000000);
+    s.move(1000000);
 
     return RAP::SUCCESS;
 }
