@@ -1,11 +1,11 @@
 # AGU
 
-In this project I set out to create a robot that autonimously takes care of plants, in my case predominantly mint for my morning mint tea. Yum.<br>
-The main goal -alongside making my mint tea without setting my foot out the apartment- was to learn as much as possible in as many areas I could, including software, hardware, electronics, CAD and even editing.
+In this project I set out to create a robot that autonimously takes care of plants.<br>
+The main goal was to learn as much as possible in as many areas I could, including software, hardware, electronics, CAD and even editing.
 
 Project Overview
 ----------------
-The project is made up of 3 layers: The Android (High-level instructions), RaspberryPi 3 (High-level interpreter of instructions), and Arduino Mega (Low-level hardware controller)
+The project is made up of 3 layers: The Android (High-level instructions), RaspberryPi 3 (High-level interpreter of instructions), and Arduino Mega (Low-level hardware controller).
 
 <p align="center"><img src="https://i.imgur.com/9xJH2lu.png" data-canonical-src="https://i.imgur.com/9xJH2lu.png" width="520" height="400" /></p>
 
@@ -22,6 +22,10 @@ CAD
 ---
 During this project I learnt to use Inventor, Fusion360, EAGLE as well as Fritzing. In the end, I ended up using Inventor instead of Fusion360 for the 3D model as it felt more natural to me (and more powerful) but used Fritzing and Eagle for the electronics diagram and schematic, respectively.
 
+<p align="center"><img src="/CAD/digrams:renders/cad_gif.gif" width="500px"></p>
+
+<p align="center"><img src="/CAD/digrams:renders/Electronics%20Diagram.png" width="400px"><img src="/CAD/digrams:renders/Electronics%20Schematic.png" width="450px"></p>
+
 Software
 ---
 
@@ -33,4 +37,5 @@ For the interface of the project I decided to make an Android application in Jav
 Hardware
 ---
 
-I managed to get Makerbeams for free from my friend, so I use that. To hold everything together, I used tie plates I got from home depot. Everything else is held together by hot glue.
+I managed to get Makerbeams for free from my friend, so I used them for the construction. To hold everything together, I used tie plates from home depot. Everything else is held together by hot glue. For motion, I used bearings for z and x axis, and leadscrew for the y axis.
+
