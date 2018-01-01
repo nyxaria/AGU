@@ -1,4 +1,4 @@
-# AGU
+# Autonomous Growing Unit
 
 In this project I set out to create a robot that autonimously takes care of plants.<br>
 The main goal was to learn as much as possible in as many areas I could, including software, hardware, electronics, CAD and even editing.
@@ -24,7 +24,7 @@ During this project I learnt to use Inventor, Fusion360, EAGLE as well as Fritzi
 
 <p align="center"><img src="/CAD/digrams:renders/cad_gif.gif" width="500px"></p>
 
-<p align="center"><img src="/CAD/digrams:renders/Electronics%20Diagram.png" width="400px"><img src="/CAD/digrams:renders/Electronics%20Schematic.png" width="450px"></p>
+<p align="center"><img src="/CAD/digrams:renders/Electronics%20Schematic.png" width="650px"></p>
 
 Software
 ---
@@ -39,3 +39,12 @@ Hardware
 
 I managed to get Makerbeams for free from my friend, so I used them for the construction. To hold everything together, I used tie plates from home depot. Everything else is held together by hot glue. For motion, I used bearings for z and x axis, and leadscrew for the y axis.
 
+In this project I used Nema17 stepper motors which I managed to get for a really good price second hand. For the fluid transfer, I used a water pump from a coffee-machine and a vacuum pump from I ordered from China. The Mosfets and other components I scavenged from old electronics I got my hands on.
+
+Electronics
+---
+
+I first created a schematic for project, and was planning on etching the PCB for the board containing the stepper motor drivers. However, none of the printers I have used to print the schematics on the toner-transfer paper in New York worked with the photo-transfer method. I presume it was because they were all Brother printers. As a result of that, I instead used a perf-board to make the driver break-out board.
+
+
+<p align="center"><img src="/CAD/digrams:renders/Electronics%20Diagram.png" width="400px"></p>
