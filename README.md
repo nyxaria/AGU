@@ -22,6 +22,7 @@ CAD
 ---
 During this project I learnt to use Inventor, Fusion360, EAGLE as well as Fritzing. In the end, I ended up using Inventor instead of Fusion360 for the 3D model as it felt more natural to me (and more powerful) but used Fritzing and Eagle for the electronics diagram and schematic, respectively.
 
+Model can be viewed online at https://skfb.ly/6vAEX.
 <p align="center"><img src="/CAD/digrams:renders/cad_gif.gif" width="500px"></p>
 
 <p align="center"><img src="/CAD/digrams:renders/Electronics%20Schematic.png" width="650px"></p>
