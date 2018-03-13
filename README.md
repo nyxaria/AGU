@@ -3,6 +3,10 @@
 In this project I set out to create a robot that autonimously takes care of plants.<br>
 The main goal was to learn as much as possible in as many areas I could, including software, hardware, electronics, CAD and even editing.
 
+
+[![project video](https://i.imgur.com/Kq0kSIq.jpg)](https://vimeo.com/259930006)
+<br><br>
+
 Project Overview
 ----------------
 The project is made up of 3 layers: The Android (High-level instructions), RaspberryPi 3 (High-level interpreter of instructions), and Arduino Mega (Low-level hardware controller).
